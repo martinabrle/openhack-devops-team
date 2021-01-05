@@ -28,7 +28,6 @@ env:
   acrname: openhackdz41qgg3acr.azurecr.io
   appname: openhackdz41qgg3poi
   resourcegroup: openhackdz41qgg3rg
-  NUGET_AUTH_TOKEN: ${{secrets.AZURE_DEVOPS_PAT}}
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
@@ -45,6 +44,8 @@ jobs:
       with:
         dotnet-version: 2.2.108
         source-url: https://pkgs.dev.azure.com/DemoCorpVeryLimited/_packaging/PackageFeed/nuget/v3/index.json
+      env:
+        NUGET_AUTH_TOKEN: ${{secrets.AZURE_DEVOPS_PAT}}
     - name: Restore dependencies
       run: dotnet restore
       working-directory: 'apis/poi/'
