@@ -1,4 +1,4 @@
-# This is a basic workflow that is manually triggered
+# This is a basic .net build and test workflow that is manually triggered
 
 name: Manual Test of POI API
 
