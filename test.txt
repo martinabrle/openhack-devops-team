@@ -1,1 +1,2 @@
 Adding the test.txt into the master branch
+and making another change
