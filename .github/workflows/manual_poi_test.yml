@@ -56,10 +56,11 @@ jobs:
       run: dotnet test --no-build --verbosity normal
       working-directory: 'apis/poi/'
     - name: Create the package
-      run: dotnet pack --configuration Release 
+      run: dotnet pack --configuration Release
+      working-directory: 'apis/poi/'
     - name: Publish the package to Azure Artifacts
       run: dotnet nuget push bin/**/Release/*.nupkg
-      working-directory: 'apis/poi/web/'
+      working-directory: 'apis/poi/'
     - name: Process errors
       if: ${{ failure() }}
       run: |
