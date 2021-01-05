@@ -4,6 +4,14 @@ name: Manual Test of POI API
 
 # Controls when the action will run. Workflow runs when manually triggered using the UI
 # or API.
+# after testing change to
+# on:
+#   push:
+#     branches: [ master ]
+#   pull_request:
+#     branches: [ master ]
+#     paths:
+#           - 'apis/poi/**'
 on:
   workflow_dispatch:
     # Inputs the workflow accepts.
@@ -18,13 +26,24 @@ on:
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-  # This workflow contains a single job called "greet"
-  greet:
+  # This workflow contains a single job called "test"
+  test:
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
-    # Runs a single command using the runners shell
-    - name: Send greeting
-      run: echo "Hello ${{ github.event.inputs.name }}"
+    - uses: actions/checkout@v2
+    - name: Setup .NET Core
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: 2.2.108
+    - name: Restore dependencies
+      run: dotnet restore
+      working-directory: 'apis/poi/'
+    - name: Build
+      run: dotnet build --configuration Release --no-restore
+      working-directory: 'apis/poi/'
+    - name: Test
+      run: dotnet test --no-build --verbosity normal
+      working-directory: 'apis/poi/'
