@@ -53,14 +53,6 @@ jobs:
               -n ${{ env.appname }} \
               --slot staging \
               --configuration-source ${{ env.appname }}
-    - name: Delete staging slot
-      uses: azure/CLI@v1
-      with:
-         inlineScript: |
-            az webapp deployment slot delete \
-              -g ${{ env.resourcegroup }} \
-              -n ${{ env.appname }} \
-              --slot staging
     - name: Process errors
       if: ${{ failure() }}
       run: |
