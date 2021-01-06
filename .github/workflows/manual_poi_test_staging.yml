@@ -40,9 +40,11 @@ jobs:
           then test_staging_result="N/A"
           else test_staging_result=${test_staging_result:7:3}
           fi
-          echo $test_staging_result
-    - name: Display variables
-      run: echo $test_staging_result
+          echo "test result:$test_staging_result"
+          if [$test_staging_result="201"];
+          then exit 0
+          fi
+          exit 1
     - name: Process errors
       if: ${{ failure() }}
       run: |
