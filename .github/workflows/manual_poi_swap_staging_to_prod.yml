@@ -49,7 +49,7 @@ jobs:
       with:
         inlineScript: |
           az webapp deployment slot swap \
-            -g ${{ env.rg }} \
+            -g ${{ env.resourcegroup }} \
             -n ${{ env.appname }} \
             --slot staging \
             --target-slot production
