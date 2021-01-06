@@ -25,7 +25,7 @@ on:
         # Input has to be provided for the workflow to run
         required: true
 env:
-  scriptname: manual-poi-deploy-staging
+  scriptname: manual_poi_deploy_staging
   acrname: openhack4zj1lt11acr.azurecr.io
   appname: openhack4zj1lt11poi
   resourcegroup: openhack4zj1lt11rg
