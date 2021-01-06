@@ -40,11 +40,11 @@ jobs:
           then test_staging_result="N/A"
           else test_staging_result=${test_staging_result:7:3}
           fi
-          if [[$test_staging_result="200" ]];
+          if [$test_staging_result="200"];
           then echo "::info healthcheck :: $appname.azurewebsites.net/api/healthcheck/poi returned an OK"
           else echo "::error healthcheck :: $appname.azurewebsites.net/api/healthcheck/poi returned an error - something went wrong"
           fi
-          if [[$test_staging_result="200"]];
+          if [$test_staging_result="200"];
           then exit 0
           fi
           exit 1          
