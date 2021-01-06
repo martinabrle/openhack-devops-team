@@ -59,7 +59,7 @@ jobs:
       run: dotnet pack --configuration Release
       working-directory: 'apis/poi/'
     - name: Publish the package to Azure Artifacts
-      run: dotnet nuget push bin/**/Release/*.nupkg
+      run: dotnet nuget push web/bin/**/Release/*.nupkg
       working-directory: 'apis/poi/'
     - name: Process errors
       if: ${{ failure() }}
