@@ -36,9 +36,13 @@ jobs:
     - name: Test staging
       run: |
           declare test_staging_result="$(curl -i https://$appname.azurewebsites.net/api/healthcheck/poi 2>/dev/null | grep HTTP/2)"
+          if [[ -z $test_staging_result ]];
+          then test_staging_result="N/A"
+          else test_staging_result=${result:7:3}
+          fi
           echo $test_staging_result
     - name: Display variables
-      run: echo $GITHUB_ENV
+      run: echo $test_staging_result
     - name: Process errors
       if: ${{ failure() }}
       run: |
