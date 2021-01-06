@@ -41,6 +41,7 @@ jobs:
           else test_staging_result=${test_staging_result:7:3}
           fi
           echo "test result:$test_staging_result"
+          echo "::error $appname.azurewebsites.net/api/healthcheck/poi returned $test_staging_result::Something went wrong"
           if [$test_staging_result="201"];
           then exit 0
           fi
