@@ -40,10 +40,10 @@ jobs:
           then test_staging_result="N/A"
           else test_staging_result=${test_staging_result:7:3}
           fi
-          if [[ "$test_staging_result" != "201" ]]
-          then echo "::error::Something went wrong, healthcheck returned status $test_staging_result"
+          if [[ "$test_staging_result" != "200" ]]
+          then echo "::error::Something went wrong, healthcheck returned a status $test_staging_result"
           fi
-          if [[ "$test_staging_result" != "201" ]]
+          if [[ "$test_staging_result" != "200" ]]
           then exit 1
           fi
     - name: Process errors
