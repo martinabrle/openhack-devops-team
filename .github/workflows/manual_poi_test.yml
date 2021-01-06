@@ -26,9 +26,9 @@ on:
         required: true
 env:
   scriptname: manual-poi-test
-  acrname: openhackdz41qgg3acr.azurecr.io
-  appname: openhackdz41qgg3poi
-  resourcegroup: openhackdz41qgg3rg
+  acrname: openhack4zj1lt11acr.azurecr.io
+  appname: openhack4zj1lt11poi
+  resourcegroup: openhack4zj1lt11rg
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
@@ -57,7 +57,7 @@ jobs:
       run: dotnet test --no-build --verbosity normal
       working-directory: 'apis/poi/'
     - name: Create the package
-      run: dotnet pack --configuration Release --version-suffix -1-manual
+      run: dotnet pack --configuration Release --version-suffix "${{ github.run_id }}-manual"
       working-directory: 'apis/poi/'
     - name: Publish the package to Azure Artifacts
       run: dotnet nuget push -k "${{secrets.AZURE_OH_DEVOPS_PAT}}" web/bin/Release/*.nupkg 
@@ -65,7 +65,11 @@ jobs:
     - name: Azure Login
       uses: azure/login@v1
       with:
-          creds: ${{ secrets.AZURE_CREDENTIALS }}      
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
+    - name: Run build
+      run: az acr build --image "devopsoh/${{ env.app_name }}:${{ github.run_id }}-manual" --registry ${{ env.acrname }} --file Dockerfile .
+      working-directory: 'apis/poi/'
+      
     - name: Process errors
       if: ${{ failure() }}
       run: |
