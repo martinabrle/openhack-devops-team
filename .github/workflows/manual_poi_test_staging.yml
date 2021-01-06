@@ -41,7 +41,7 @@ jobs:
           else test_staging_result=${test_staging_result:7:3}
           fi
           if [[ "$test_staging_result" != "201" ]]
-          then echo "::error file=app.js,line=10,col=15::Something went wrong"
+          then echo "::error::Something went wrong, healthcheck returned status $test_staging_result"
           fi
           if [[ "$test_staging_result" != "201" ]]
           then exit 1
