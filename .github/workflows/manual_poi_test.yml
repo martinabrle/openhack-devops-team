@@ -57,11 +57,15 @@ jobs:
       run: dotnet test --no-build --verbosity normal
       working-directory: 'apis/poi/'
     - name: Create the package
-      run: dotnet pack --configuration Release --version-suffix manual
+      run: dotnet pack --configuration Release --version-suffix -1-manual
       working-directory: 'apis/poi/'
     - name: Publish the package to Azure Artifacts
       run: dotnet nuget push -k "${{secrets.AZURE_OH_DEVOPS_PAT}}" web/bin/Release/*.nupkg 
       working-directory: 'apis/poi/'
+    - name: Azure Login
+      uses: azure/login@v1
+      with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}      
     - name: Process errors
       if: ${{ failure() }}
       run: |
