@@ -13,6 +13,7 @@ name: Manual deletion of staging slot with POI API
 #     paths:
 #           - 'apis/poi/**'
 #use ${{ github.GITHUB_SHA }} instead of the manual suffix
+
 on:
   workflow_dispatch:
     # Inputs the workflow accepts.
