@@ -59,6 +59,7 @@ jobs:
     - name: Create the package
       run: dotnet pack --configuration Release --version-suffix "${{ github.run_id }}-manual"
       working-directory: 'apis/poi/'
+    # Publishing into azure artefacts is not really needed - as we're pushing the docker into ACR later on
     - name: Publish the package to Azure Artifacts
       run: dotnet nuget push -k "${{secrets.AZURE_OH_DEVOPS_PAT}}" web/bin/Release/*.nupkg 
       working-directory: 'apis/poi/'
@@ -66,9 +67,9 @@ jobs:
       uses: azure/login@v1
       with:
           creds: ${{ secrets.AZURE_CREDENTIALS }}
-    - name: Run build
-      run: az acr build --image "devopsoh/${{ env.app_name }}:${{ github.run_id }}-manual" --registry ${{ env.acrname }} --file Dockerfile .
-      working-directory: 'apis/poi/'
+    - name: Run container build
+      run: az acr build --image "devopsoh/${{ env.app_name }}:${{ github.run_id }}-manual" -t --image "devopsoh/${{ env.app_name }}:latest" --registry ${{ env.acrname }} --file Dockerfile .
+      working-directory: 'apis/poi/web'
       
     - name: Process errors
       if: ${{ failure() }}
