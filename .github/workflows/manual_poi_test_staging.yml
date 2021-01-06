@@ -40,7 +40,10 @@ jobs:
           then test_staging_result="N/A"
           else test_staging_result=${test_staging_result:7:3}
           fi
-          if [[ "$test_staging_result" != "200" ]]
+          if [[ "$test_staging_result" != "201" ]]
+          then echo echo "::error manual_poi_testing::Healthcheck returned $test_staging_result - Something went wrong"
+          fi
+          if [[ "$test_staging_result" != "201" ]]
           then exit 1
           fi
     - name: Process errors
