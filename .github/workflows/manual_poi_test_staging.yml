@@ -41,7 +41,7 @@ jobs:
           else test_staging_result=${test_staging_result:7:3}
           fi
           if [[ "$test_staging_result" != "201" ]]
-          then echo echo "::error manual_poi_testing::Healthcheck returned $test_staging_result - Something went wrong"
+          then echo "::error file=app.js,line=10,col=15::Something went wrong"
           fi
           if [[ "$test_staging_result" != "201" ]]
           then exit 1
