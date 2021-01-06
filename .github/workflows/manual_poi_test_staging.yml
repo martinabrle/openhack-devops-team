@@ -35,7 +35,7 @@ jobs:
     steps:
     - name: Test staging
       run: |
-          echo "test_staging_result = $(curl -i https://$appname.azurewebsites.net/api/healthcheck/poi" 2>/dev/null | grep HTTP/2)" >> $GITHUB_ENV
+          echo "test_staging_result = $(curl -i https://$appname.azurewebsites.net/api/healthcheck/poi 2>/dev/null | grep HTTP/2)" >> $GITHUB_ENV
     - name: Display variables
       run: echo $GITHUB_ENV
     - name: Process errors
