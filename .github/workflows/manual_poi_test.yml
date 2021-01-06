@@ -68,7 +68,7 @@ jobs:
       with:
           creds: ${{ secrets.AZURE_CREDENTIALS }}
     - name: Run container build
-      run: az acr build --image "devopsoh/${{ env.app_name }}:${{ github.run_id }}-manual" -t "devopsoh/${{ env.app_name }}:latest" --registry ${{ env.acrname }} --file Dockerfile .
+      run: az acr build --image "devopsoh/${{ env.appname }}:${{ github.run_id }}-manual" -t "devopsoh/${{ env.appname }}:latest" --registry ${{ env.acrname }} --file Dockerfile .
       working-directory: 'apis/poi/web'
       
     - name: Process errors
