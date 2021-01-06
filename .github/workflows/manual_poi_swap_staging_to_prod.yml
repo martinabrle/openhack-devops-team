@@ -44,7 +44,7 @@ jobs:
       uses: azure/login@v1
       with:
           creds: ${{ secrets.AZURE_CREDENTIALS }}
-    - name: Rollback Prod->Staging
+    - name: Swap Staging->Prod
       uses: azure/CLI@v1
       with:
         inlineScript: |
