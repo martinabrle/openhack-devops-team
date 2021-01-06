@@ -40,7 +40,7 @@ jobs:
           then test_staging_result="N/A"
           else test_staging_result=${test_staging_result:7:3}
           fi
-          if [$test_staging_result="201"];
+          if [$test_staging_result != "201"];
           then echo "::error healthcheck::$appname.azurewebsites.net/api/healthcheck/poi returned $test_staging_result - Something went wrong"
           fi
     - name: Process errors
