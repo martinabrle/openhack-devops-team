@@ -15,8 +15,7 @@ name: Manual build of POI API
 #use ${{ github.GITHUB_SHA }} instead of the manual suffix
 on:
   workflow_dispatch:
-    # Inputs the workflow accepts.
-    inputs:
+
 env:
   scriptname: manual-poi-build
   acrname: openhack4zj1lt11acr.azurecr.io
